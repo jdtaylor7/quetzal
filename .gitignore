@@ -1,0 +1,9 @@
+# Build directories.
+/build
+
+# Build files.
+*.o
+*.exe
+*.o.tmp
+*.exe.stackdump
+quetzal
