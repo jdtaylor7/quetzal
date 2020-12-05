@@ -14,7 +14,7 @@ include_directories(
 )
 
 # Add executables.
-add_executable(quetzal src/main.cpp)
+add_executable(quetzal src/quetzal.cpp)
 
 # Add compiler options.
 target_compile_options(quetzal PRIVATE -O2)
