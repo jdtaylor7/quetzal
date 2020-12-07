@@ -23,7 +23,7 @@ fi
 mkdir -p build
 cd build
 
-cmake $compile_flags ..
+cmake -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-arm-none-eabi.cmake ..
 
 # Add cmake build command line variables.
 build_flags=""
@@ -34,4 +34,4 @@ else
     echo "Building all targets"
 fi
 
-cmake --build . $build_flags
+cmake --build . $build_flags -- VERBOSE=1
