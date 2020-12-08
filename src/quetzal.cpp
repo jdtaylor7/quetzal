@@ -2,6 +2,8 @@
 
 #include "serial.hpp"
 
+extern char __stack_end;
+
 constexpr uint32_t USART_BAUD = 9600;
 
 void blink()
@@ -39,6 +41,6 @@ void mainFn() {
 }
 
 extern void (* const vectors[])() __attribute__ ((section(".vectors"))) = {
-                (void (*)())0x20000400,
+                (void (*)())*__stack_end,
                 mainFn,
 };
