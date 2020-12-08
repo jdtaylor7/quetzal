@@ -41,6 +41,6 @@ void mainFn() {
 }
 
 extern void (* const vectors[])() __attribute__ ((section(".vectors"))) = {
-                (void (*)())*__stack_end,
+                (void (*)())&__stack_end,
                 mainFn,
 };

@@ -17,9 +17,8 @@ include_directories(
     "${PROJECT_SOURCE_DIR}/include/stm32f1xx"
 )
 
-# Compile object library.
-add_library(${PROJECT_NAME}_obj OBJECT src/${PROJECT_NAME}.cpp)
-target_compile_options(${PROJECT_NAME}_obj PRIVATE
+# Add compile/link options.
+add_compile_options(
     -mcpu=cortex-m3
     -mthumb
     -O2
@@ -41,11 +40,7 @@ target_compile_options(${PROJECT_NAME}_obj PRIVATE
     -ffunction-sections
     -fdata-sections
 )
-target_compile_definitions(${PROJECT_NAME}_obj PRIVATE -DSTM32F103xB)
-
-# Link according to linker file.
-add_executable(${PROJECT_NAME}_elf)
-target_link_options(${PROJECT_NAME}_elf PRIVATE
+add_link_options(
     -mcpu=cortex-m3
     -mthumb
     -T${LINKER_SCRIPT}
@@ -57,7 +52,16 @@ target_link_options(${PROJECT_NAME}_elf PRIVATE
     # -Wl,--print-gc-sections
     -Wl,--orphan-handling=error
 )
-target_link_libraries(${PROJECT_NAME}_elf ${PROJECT_NAME}_obj)
+
+# Compile executable as an object file.
+add_library(${PROJECT_NAME}_obj OBJECT src/${PROJECT_NAME}.cpp)
+target_compile_definitions(${PROJECT_NAME}_obj PRIVATE -DSTM32F103xB)
+
+# Link executable according to linker file.
+add_executable(${PROJECT_NAME}_elf)
+target_link_libraries(${PROJECT_NAME}_elf
+    ${PROJECT_NAME}_obj
+)
 
 # Strip ELF information.
 add_custom_command(
