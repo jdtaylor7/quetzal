@@ -18,8 +18,8 @@ include_directories(
 )
 
 # Compile object library.
-add_library(quetzal_obj OBJECT src/quetzal.cpp)
-target_compile_options(quetzal_obj PRIVATE
+add_library(${PROJECT_NAME}_obj OBJECT src/${PROJECT_NAME}.cpp)
+target_compile_options(${PROJECT_NAME}_obj PRIVATE
     -mcpu=cortex-m3
     -mthumb
     -O2
@@ -41,26 +41,26 @@ target_compile_options(quetzal_obj PRIVATE
     -ffunction-sections
     -fdata-sections
 )
-target_compile_definitions(quetzal_obj PRIVATE -DSTM32F103xB)
+target_compile_definitions(${PROJECT_NAME}_obj PRIVATE -DSTM32F103xB)
 
 # Link according to linker file.
-add_executable(quetzal_elf)
-target_link_options(quetzal_elf PRIVATE
+add_executable(${PROJECT_NAME}_elf)
+target_link_options(${PROJECT_NAME}_elf PRIVATE
     -mcpu=cortex-m3
     -mthumb
     -T${LINKER_SCRIPT}
     -nostartfiles
-    -Wl,-Map=quetzal.map,--cref
+    -Wl,-Map=${PROJECT_NAME}.map,--cref
     -Wl,--print-memory-usage
     -Wl,--warn-common
     -Wl,--gc-sections
     # -Wl,--print-gc-sections
 )
-target_link_libraries(quetzal_elf quetzal_obj)
+target_link_libraries(${PROJECT_NAME}_elf ${PROJECT_NAME}_obj)
 
 # Strip ELF information.
 add_custom_command(
-    TARGET quetzal_elf
+    TARGET ${PROJECT_NAME}_elf
     POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -O binary ${CMAKE_CURRENT_BINARY_DIR}/quetzal_elf ${CMAKE_CURRENT_BINARY_DIR}/quetzal
+    COMMAND ${CMAKE_OBJCOPY} -O binary ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_elf ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
 )
