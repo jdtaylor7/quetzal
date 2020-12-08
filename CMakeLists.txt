@@ -55,6 +55,7 @@ target_link_options(${PROJECT_NAME}_elf PRIVATE
     -Wl,--warn-common
     -Wl,--gc-sections
     # -Wl,--print-gc-sections
+    -Wl,--orphan-handling=error
 )
 target_link_libraries(${PROJECT_NAME}_elf ${PROJECT_NAME}_obj)
 
