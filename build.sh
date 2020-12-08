@@ -34,4 +34,4 @@ else
     echo "Building all targets"
 fi
 
-cmake --build . $build_flags -- VERBOSE=1
+cmake --build . $build_flags

@@ -7,14 +7,14 @@ void mainFn() {
 
     while (1) {
         int ctr;
-        ctr = (8000000 / 3) / 2 / 5;
+        ctr = (8000000 / 3) / 2 / 1;
         // each loop iteration takes 3 cycles to execute.
         while (ctr) {
             asm ("");
             --ctr;
         }
         GPIOC->BRR = 1 << 13;
-        ctr = (8000000 / 3) / 2 / 5;
+        ctr = (8000000 / 3) / 2 / 1;
         // each loop iteration takes 3 cycles to execute.
         while (ctr) {
             asm ("");
