@@ -1,4 +1,4 @@
-#include <string>
+// #include <string>
 
 #include <stm32f1xx.h>
 
@@ -27,14 +27,14 @@ void usartWriteChar(unsigned char c)
     USART1->DR = c;
 }
 
-void usartWriteStr(const std::string& str)
-{
-    for (unsigned char c : str)
-        usartWriteChar(c);
-}
-
-// void usartWriteStr(const char* str)
+// void usartWriteStr(const std::string& str)
 // {
-//     for (const char* c = str; *c; c++)
-//         usartWriteChar(*c);
+//     for (unsigned char c : str)
+//         usartWriteChar(c);
 // }
+
+void usartWriteStr(const char* str)
+{
+    for (const char* c = str; *c; c++)
+        usartWriteChar(*c);
+}
