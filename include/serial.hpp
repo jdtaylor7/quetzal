@@ -6,7 +6,7 @@ constexpr uint32_t HSI = 8000000;  // High-speed internal clock
 
 void init_serial(uint32_t baud)
 {
-    uint16_t usart_divider = HSI / (16 * baud);
+    uint16_t usart_divider = static_cast<uint16_t>(HSI / (16 * baud));
 
     // Set up USART1 peripheral.
     RCC->APB2ENR |= RCC_APB2ENR_USART1EN;  // Enable USART1 peripheral

@@ -2,7 +2,7 @@
 
 #include "serial.hpp"
 
-constexpr uint16_t USART_BAUD = 9600;
+constexpr uint32_t USART_BAUD = 9600;
 
 void blink()
 {
