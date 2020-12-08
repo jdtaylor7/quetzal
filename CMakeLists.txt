@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add include directories.
 include_directories(
+    "${PROJECT_SOURCE_DIR}/include"
     "${PROJECT_SOURCE_DIR}/include/cmsis"
     "${PROJECT_SOURCE_DIR}/include/stm32f1xx"
 )
