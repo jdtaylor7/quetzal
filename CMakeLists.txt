@@ -53,6 +53,9 @@ add_link_options(
     -Wl,--orphan-handling=error
 )
 
+# Compile tests.
+add_library(test_language_features OBJECT test/test_language_features.cpp)
+
 # Compile executable as an object file.
 add_library(${PROJECT_NAME}_obj OBJECT src/${PROJECT_NAME}.cpp)
 target_compile_definitions(${PROJECT_NAME}_obj PRIVATE -DSTM32F103xB)
@@ -61,6 +64,7 @@ target_compile_definitions(${PROJECT_NAME}_obj PRIVATE -DSTM32F103xB)
 add_executable(${PROJECT_NAME}_elf)
 target_link_libraries(${PROJECT_NAME}_elf
     ${PROJECT_NAME}_obj
+    test_language_features
 )
 
 # Strip ELF information.
