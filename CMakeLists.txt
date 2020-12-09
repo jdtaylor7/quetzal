@@ -39,6 +39,10 @@ add_compile_options(
     -Wconversion
     -ffunction-sections
     -fdata-sections
+    -ffreestanding
+    # -fstack-protector-strong
+    -finline-small-functions
+    -findirect-inlining
 )
 add_link_options(
     -mcpu=cortex-m3

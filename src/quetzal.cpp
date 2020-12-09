@@ -48,7 +48,8 @@ void init_sram_sections()
         *dst++ = *src++;
 }
 
-void mainFn() {
+// Allowed to return void type since we're in a freestanding environment.
+void main() {
     // Set up GPIOC 13 (green light) for LED control, then turn off.
     RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
     GPIOC->CRH = 0b0100'0100'0011'0100'0100'0100'0100'0100;
@@ -75,5 +76,5 @@ void mainFn() {
 
 extern void (* const vectors[])() __attribute__ ((section(".vectors"))) = {
                 (void (*)())&__stack_end,
-                mainFn,
+                main,
 };
