@@ -1,5 +1,6 @@
 #include <stm32f1xx.h>
 
+#include "oscillator.hpp"
 #include "serial.hpp"
 #include "test_language_features.hpp"
 
@@ -10,14 +11,14 @@ constexpr uint32_t USART_BAUD = 9600;
 void blink()
 {
     int ctr;
-    ctr = (8000000 / 3) / 2 / 1;
+    ctr = (8000000 / 3) / 2 * 6;
     // each loop iteration takes 3 cycles to execute.
     while (ctr) {
         asm ("");
         --ctr;
     }
     GPIOC->BRR = 1 << 13;
-    ctr = (8000000 / 3) / 2 / 1;
+    ctr = (8000000 / 3) / 2 * 6;
     // each loop iteration takes 3 cycles to execute.
     while (ctr) {
         asm ("");
@@ -65,6 +66,7 @@ void main() {
         while (1);
     }
 
+    init_oscillator();
     init_serial(USART_BAUD);
 
     while (1)
