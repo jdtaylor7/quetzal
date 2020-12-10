@@ -56,18 +56,30 @@ add_link_options(
     # -Wl,--print-gc-sections
     -Wl,--orphan-handling=error
 )
+add_compile_definitions(STM32F103xB)
 
 # Compile tests.
 add_library(test_language_features OBJECT test/test_language_features.cpp)
 
-# Compile executable as an object file.
-add_library(${PROJECT_NAME}_obj OBJECT src/${PROJECT_NAME}.cpp)
-target_compile_definitions(${PROJECT_NAME}_obj PRIVATE -DSTM32F103xB)
+# Compile object files.
+add_library(oscillator OBJECT src/oscillator.cpp)
+add_library(serial OBJECT src/serial.cpp)
+add_library(interrupts OBJECT src/interrupts.cpp)
+
+# Compile quetzal executable.
+add_library(${PROJECT_NAME}_lib OBJECT src/${PROJECT_NAME}.cpp)
+
+# Compile vectors executable.
+add_library(vectors_lib OBJECT src/vectors.cpp)
 
 # Link executable according to linker file.
 add_executable(${PROJECT_NAME}_elf)
 target_link_libraries(${PROJECT_NAME}_elf
-    ${PROJECT_NAME}_obj
+    vectors_lib
+    ${PROJECT_NAME}_lib
+    oscillator
+    serial
+    interrupts
     test_language_features
 )
 

@@ -1,10 +1,4 @@
-#include <stm32f1xx.h>
-
-#include "oscillator.hpp"
-#include "serial.hpp"
-#include "test_language_features.hpp"
-
-extern char __stack_end;
+#include "quetzal.hpp"
 
 constexpr uint32_t USART_BAUD = 9600;
 
@@ -50,7 +44,8 @@ void init_sram_sections()
 }
 
 // Allowed to return void type since we're in a freestanding environment.
-void main() {
+void main()
+{
     // Set up GPIOC 13 (green light) for LED control, then turn off.
     RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
     GPIOC->CRH = 0b0100'0100'0011'0100'0100'0100'0100'0100;
@@ -75,8 +70,3 @@ void main() {
         blink();
     }
 }
-
-extern void (* const vectors[])() __attribute__ ((section(".vectors"))) = {
-                (void (*)())&__stack_end,
-                main,
-};
