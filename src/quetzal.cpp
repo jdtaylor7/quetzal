@@ -61,7 +61,7 @@ void main()
         while (1);
     }
 
-    init_oscillator();
+    init_sysclk();
     init_serial(USART_BAUD);
 
     while (1)

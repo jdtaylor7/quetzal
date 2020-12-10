@@ -3,7 +3,7 @@
 
 #include <stm32f1xx.h>
 
-#include "oscillator.hpp"
+#include "clocks.hpp"
 #include "serial.hpp"
 #include "test_language_features.hpp"
 

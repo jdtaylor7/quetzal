@@ -1,6 +1,6 @@
 #include "oscillator.hpp"
 
-void init_oscillator()
+void init_sysclk()
 {
     // Enable HSE.
     RCC->CR |= RCC_CR_HSEON;
