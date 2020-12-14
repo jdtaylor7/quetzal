@@ -77,7 +77,7 @@ add_executable(${PROJECT_NAME}_elf)
 target_link_libraries(${PROJECT_NAME}_elf
     vectors_lib
     ${PROJECT_NAME}_lib
-    oscillator
+    clocks
     serial
     interrupts
     test_language_features

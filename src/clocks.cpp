@@ -1,4 +1,4 @@
-#include "oscillator.hpp"
+#include "clocks.hpp"
 
 void init_sysclk()
 {
