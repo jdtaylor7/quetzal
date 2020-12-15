@@ -50,7 +50,7 @@ extern "C" void default_handler_wrapper()
 #define irq37_handler    usart1_handler
 #define irq38_handler    usart2_handler
 #define irq39_handler    usart3_handler
-#define irq40_handler    exti5_10_handler
+#define irq40_handler    exti15_10_handler
 #define irq41_handler    rtc_alarm_handler
 #define irq42_handler    usb_wakeup_handler
 #define irq43_handler    tim8_brk_handler
