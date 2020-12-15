@@ -63,7 +63,7 @@ add_library(test_language_features OBJECT test/test_language_features.cpp)
 
 # Compile object files.
 add_library(clocks OBJECT src/clocks.cpp)
-add_library(interrupts OBJECT src/interrupts.cpp)
+add_library(handlers OBJECT src/handlers.cpp)
 add_library(serial OBJECT src/serial.cpp)
 add_library(timers OBJECT src/timers.cpp)
 
@@ -79,7 +79,7 @@ target_link_libraries(${PROJECT_NAME}_elf
     vectors_lib
     ${PROJECT_NAME}_lib
     clocks
-    interrupts
+    handlers
     serial
     timers
     test_language_features
