@@ -65,6 +65,7 @@ add_library(test_language_features OBJECT test/test_language_features.cpp)
 add_library(clocks OBJECT src/clocks.cpp)
 add_library(handlers OBJECT src/handlers.cpp)
 add_library(serial OBJECT src/serial.cpp)
+add_library(startup OBJECT src/startup.cpp)
 add_library(timers OBJECT src/timers.cpp)
 
 # Compile quetzal executable.
@@ -81,6 +82,7 @@ target_link_libraries(${PROJECT_NAME}_elf
     clocks
     handlers
     serial
+    startup
     timers
     test_language_features
 )
