@@ -4,6 +4,8 @@
 #include <stm32f1xx.h>
 
 #include "quetzal.hpp"
+#include "startup.hpp"
+#include "test_language_features.hpp"
 
 void reset_handler();
 void default_handler();

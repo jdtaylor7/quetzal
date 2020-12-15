@@ -1,5 +1,4 @@
 #include "handlers.hpp"
-#include "startup.hpp"
 
 void reset_handler()
 {
