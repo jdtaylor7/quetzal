@@ -9,7 +9,7 @@ void init_sysclk()
     while (!(RCC->CR & RCC_CR_HSERDY));
 
     // Configure PLL. 8 MHz external oscillator * 6 = 48 MHz. APB1 must be
-    // <36 MHz.
+    // <36 MHz, so divide by 2 to get APB1 frequency of 24 MHz.
     RCC->CFGR |= (RCC_CFGR_PLLMULL6 | RCC_CFGR_PLLSRC | RCC_CFGR_PPRE1_DIV2);
 
     // Enable PLL.

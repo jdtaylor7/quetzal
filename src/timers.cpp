@@ -1,9 +1,9 @@
 #include "timers.hpp"
 
 /*
- * Operates at 1 kHz. Source is APB1, which runs at 24 MHz. Therefore, must
- * divide by 24k. Auto-reload (ARR) value of 24k fits in the 16-bit ARR
- * register, so prescaling is not required.
+ * Operates at 1 kHz. Source is APB1 * 2, which is (24 MHz) * 2 = 48 MHz.
+ * Therefore, must divide by 48k. Auto-reload (ARR) value of 24k fits in the
+ * 16-bit ARR register, so prescaling is not required.
  */
 void init_tim2()
 {
@@ -14,7 +14,7 @@ void init_tim2()
 
     // Configure TIM2.
     TIM2->DIER |= TIM_DIER_UIE;
-    TIM2->ARR = 24'000 - 1;
+    TIM2->ARR = 48'000 - 1;
 
     // Start TIM2.
     TIM2->CR1 |= TIM_CR1_CEN;
@@ -27,8 +27,8 @@ void init_tim2()
 }
 
 /*
- * Operates at 1 Hz. Source is APB1, which runs at 24 MHz. Therefore, must
- * divide by 24M. Auto-reload (ARR) value is 24k, prescaler (PSC) is 1k.
+ * Operates at 1 Hz. Source is APB1 * 2, which is (24 MHz) * 2. Therefore, must
+ * divide by 48M. Auto-reload (ARR) value is 48k, prescaler (PSC) is 1k.
  */
 void init_tim3()
 {
@@ -38,7 +38,7 @@ void init_tim3()
 
     // Configure TIM3.
     TIM3->DIER |= TIM_DIER_UIE;
-    TIM3->ARR = 24'000 - 1;
+    TIM3->ARR = 48'000 - 1;
     TIM3->PSC = 1'000;
 
     // Start TIM3.
