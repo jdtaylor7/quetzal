@@ -6,6 +6,7 @@
 #include "clocks.hpp"
 #include "serial.hpp"
 #include "test_language_features.hpp"
+#include "timers.hpp"
 
 void blink();
 void init_sram_sections();

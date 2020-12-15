@@ -2,25 +2,6 @@
 
 constexpr uint32_t USART_BAUD = 9600;
 
-void blink()
-{
-    int ctr;
-    ctr = (8000000 / 3) / 2 * 6;
-    // each loop iteration takes 3 cycles to execute.
-    while (ctr) {
-        asm ("");
-        --ctr;
-    }
-    GPIOC->BRR = 1 << 13;
-    ctr = (8000000 / 3) / 2 * 6;
-    // each loop iteration takes 3 cycles to execute.
-    while (ctr) {
-        asm ("");
-        --ctr;
-    }
-    GPIOC->BSRR = 1 << 13;
-}
-
 void init_sram_sections()
 {
     extern uint32_t __bss_start;
@@ -62,11 +43,12 @@ void main()
     }
 
     init_sysclk();
-    init_serial(USART_BAUD);
+    init_tim2();
+    // init_tim3();
+    // init_serial(USART_BAUD);
 
     while (1)
     {
-        usartWriteStr("hello!\r\n");
-        blink();
+        __WFI();
     }
 }
