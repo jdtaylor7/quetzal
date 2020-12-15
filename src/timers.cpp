@@ -48,5 +48,5 @@ void init_tim3()
     TIM3->SR = 0;
 
     NVIC_EnableIRQ(TIM3_IRQn);
-    NVIC_SetPriority(TIM3_IRQn, 14);
+    NVIC_SetPriority(TIM3_IRQn, 15);
 }
