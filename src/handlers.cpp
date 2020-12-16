@@ -35,11 +35,21 @@ void default_handler()
 void tim2_handler()
 {
     TIM2->SR = 0;
-    GPIOB->ODR ^= GPIO_ODR_ODR12;
+    GPIOA->ODR ^= GPIO_ODR_ODR11;
 }
 
 void tim3_handler()
 {
     TIM3->SR = 0;
-    GPIOC->ODR ^= GPIO_ODR_ODR13;
+    // GPIOC->ODR ^= GPIO_ODR_ODR13;
+}
+
+void exti15_10_handler()
+{
+    // EXTI12.
+    if (EXTI->PR & EXTI_PR_PR12)
+    {
+        EXTI->PR |= EXTI_PR_PR12;
+        GPIOC->ODR ^= GPIO_ODR_ODR13;
+    }
 }

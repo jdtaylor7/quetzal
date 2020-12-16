@@ -11,5 +11,6 @@ void reset_handler();
 void default_handler();
 void tim2_handler();
 void tim3_handler();
+void exti15_10_handler();
 
 #endif /* INTERRUPTS_HPP */
