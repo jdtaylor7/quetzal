@@ -42,7 +42,7 @@ void init_tim3()
     TIM3->PSC = 1'000;
 
     // Start TIM3.
-    TIM3->CR1 |= TIM_CR1_CEN;
+    // TIM3->CR1 |= TIM_CR1_CEN;
 
     // Clear and enable interrupts.
     TIM3->SR = 0;
@@ -66,7 +66,11 @@ void init_tim4()
     // Configure TIM4.
     TIM4->DIER |= TIM_DIER_UIE;
     TIM4->ARR = 48'000 - 1;
-    TIM4->PSC = DEBOUNCE_TIME_MS;
+    // TIM4->PSC = DEBOUNCE_TIME_MS;
+    TIM4->PSC = 1'000;
+
+    // Start TIM4.
+    // TIM4->CR1 |= TIM_CR1_CEN;
 
     // Clear and enable interrupts.
     TIM4->SR = 0;

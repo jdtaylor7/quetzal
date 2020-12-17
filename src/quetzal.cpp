@@ -2,7 +2,9 @@
 
 constexpr uint32_t USART_BAUD = 9600;
 
-// Allowed to return void type since we're in a freestanding environment.
+/*
+ * Allowed to return void type since we're in a freestanding environment.
+ */
 void main()
 {
     // Set up GPIO C13 (green light) for LED control, then turn off.
@@ -29,8 +31,7 @@ void main()
 
     // Set up EXTI 12 for external interrupts via GPIO B12.
     EXTI->IMR |= EXTI_IMR_MR12;  // Unmask interrupts
-    EXTI->FTSR |= EXTI_FTSR_TR12;  // Falling trigger (pulled-down when button pushed)
-    // EXTI->RTSR |= EXTI_RTSR_TR12;  // Rising trigger
+    EXTI->FTSR |= EXTI_FTSR_TR12;  // Falling trigger
 
     // Enable EXTI12 interrupt.
     NVIC_EnableIRQ(EXTI15_10_IRQn);
