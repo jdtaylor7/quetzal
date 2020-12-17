@@ -30,14 +30,16 @@ void main()
     // Set up EXTI 12 for external interrupts via GPIO B12.
     EXTI->IMR |= EXTI_IMR_MR12;  // Unmask interrupts
     EXTI->FTSR |= EXTI_FTSR_TR12;  // Falling trigger (pulled-down when button pushed)
+    // EXTI->RTSR |= EXTI_RTSR_TR12;  // Rising trigger
 
     // Enable EXTI12 interrupt.
     NVIC_EnableIRQ(EXTI15_10_IRQn);
-    NVIC_SetPriority(EXTI15_10_IRQn, 15);
+    NVIC_SetPriority(EXTI15_10_IRQn, 3);
 
     init_sysclk();
     init_tim2();
     init_tim3();
+    init_tim4();
     // init_serial(USART_BAUD);
 
     while (1)

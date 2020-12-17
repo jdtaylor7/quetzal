@@ -50,3 +50,27 @@ void init_tim3()
     NVIC_EnableIRQ(TIM3_IRQn);
     NVIC_SetPriority(TIM3_IRQn, 15);
 }
+
+/*
+ * Operates at 1 kHz. Runs for a specified number of milliseconds. Source is
+ * APB1 * 2, which is (24 MHz) * 2. Therefore, must divide by 48k. Auto-reload
+ * (ARR) value of 24k fits in the 16-bit ARR register, so prescaling is not
+ * required.
+ */
+void init_tim4()
+{
+    RCC->APB1ENR |= RCC_APB1ENR_TIM4EN;
+    RCC->APB1RSTR |= RCC_APB1RSTR_TIM4RST;
+    RCC->APB1RSTR &= ~RCC_APB1RSTR_TIM4RST;
+
+    // Configure TIM4.
+    TIM4->DIER |= TIM_DIER_UIE;
+    TIM4->ARR = 48'000 - 1;
+    TIM4->PSC = DEBOUNCE_TIME_MS;
+
+    // Clear and enable interrupts.
+    TIM4->SR = 0;
+
+    NVIC_EnableIRQ(TIM4_IRQn);
+    NVIC_SetPriority(TIM4_IRQn, 15);
+}

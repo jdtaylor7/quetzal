@@ -1,5 +1,7 @@
 #include "handlers.hpp"
 
+bool debounce_active = false;
+
 void reset_handler()
 {
     // Set up GPIOC 13 (green light) for LED control, then turn off.
@@ -11,10 +13,10 @@ void reset_handler()
     // Run all startup code.
     startup();
 
-    // Enable GPIO and hang if tests fail.
+    // Set GPIO and hang if tests fail.
     if (!test_all_language_features())
     {
-        GPIOC->BRR = GPIO_BRR_BR13;
+        GPIOC->BSRR = GPIO_BSRR_BS13;
         while (1);
     }
 
@@ -41,15 +43,46 @@ void tim2_handler()
 void tim3_handler()
 {
     TIM3->SR = 0;
-    // GPIOC->ODR ^= GPIO_ODR_ODR13;
+    GPIOC->ODR ^= GPIO_ODR_ODR13;
 }
 
+/*
+ * Runs a debounce check for exti15_10_handler.
+ */
+void tim4_handler()
+{
+    GPIOA->ODR ^= GPIO_ODR_ODR11;
+
+    /*
+     * If true, debounce test passed and input is valid.
+     */
+    if (~(GPIOB->IDR & GPIO_IDR_IDR12))
+        GPIOA->ODR ^= GPIO_ODR_ODR11;
+
+    // Stop and reset timer.
+    TIM4->CR1 &= ~TIM_CR1_CEN;
+    TIM4->SR = 0;
+    debounce_active = false;
+}
+
+/*
+ * Initiates a debounce check to ensure valid input.
+ */
 void exti15_10_handler()
 {
     // EXTI12.
     if (EXTI->PR & EXTI_PR_PR12)
     {
+        // Clear interrupt.
         EXTI->PR |= EXTI_PR_PR12;
-        GPIOC->ODR ^= GPIO_ODR_ODR13;
+
+        if (!debounce_active)
+        {
+            debounce_active = true;
+
+            // Start TIM4.
+            TIM4->SR = 0;
+            TIM4->CR1 |= TIM_CR1_CEN;
+        }
     }
 }
