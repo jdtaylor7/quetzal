@@ -38,8 +38,8 @@ void main()
     NVIC_SetPriority(EXTI15_10_IRQn, 3);
 
     init_sysclk();
-    init_tim2();
-    init_tim3();
+    // init_tim2();
+    // init_tim3();
     init_tim4();
     // init_serial(USART_BAUD);
 

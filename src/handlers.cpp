@@ -43,7 +43,7 @@ void tim2_handler()
 void tim3_handler()
 {
     TIM3->SR = 0;
-    // GPIOC->ODR ^= GPIO_ODR_ODR13;
+    GPIOC->ODR ^= GPIO_ODR_ODR13;
 }
 
 /*
@@ -51,6 +51,7 @@ void tim3_handler()
  */
 void tim4_handler()
 {
+    TIM4->SR = 0;
     GPIOA->ODR ^= GPIO_ODR_ODR11;
 
     /*
@@ -61,7 +62,6 @@ void tim4_handler()
 
     // Stop and reset timer.
     // TIM4->CR1 &= ~TIM_CR1_CEN;
-    TIM4->SR = 0;
     // debounce_active = false;
 }
 
@@ -76,18 +76,10 @@ void exti15_10_handler()
         // Clear interrupt.
         EXTI->PR |= EXTI_PR_PR12;
 
-        // GPIOA->ODR ^= GPIO_ODR_ODR11;
-
-        TIM2->SR = 0;
-        // Stop TIM2.
-        // TIM2->CR1 &= ~TIM_CR1_CEN;
-        // Start TIM2.
-        TIM2->CR1 |= TIM_CR1_CEN;
-        // Toggle TIM2.
-        // if (TIM2->CR1 & TIM_CR1_CEN)
-        //     TIM2->CR1 &= ~TIM_CR1_CEN;
-        // else
-        //     TIM2->CR1 |= TIM_CR1_CEN;
+        // Start TIM4.
+        // TIM4->CR1 |= TIM_CR1_CEN;
+        // Toggle TIM4.
+        TIM4->CR1 &= TIM_CR1_CEN;  // TODO remove
 
         // if (!debounce_active)
         // {

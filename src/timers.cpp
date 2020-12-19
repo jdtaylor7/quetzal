@@ -15,11 +15,10 @@ void init_tim2()
     // Configure TIM2.
     TIM2->DIER |= TIM_DIER_UIE;
     TIM2->ARR = 48'000 - 1;
-    TIM2->PSC = 1'000;  // TODO remove
-    TIM2->CR1 |= TIM_CR1_OPM;  // TODO remove
+    // TIM2->PSC = 1'000;  // TODO remove
 
     // Start TIM2.
-    // TIM2->CR1 |= TIM_CR1_CEN;
+    TIM2->CR1 |= TIM_CR1_CEN;
 
     // Clear and enable interrupts.
     TIM2->SR = 0;
@@ -69,7 +68,8 @@ void init_tim4()
     TIM4->DIER |= TIM_DIER_UIE;
     TIM4->ARR = 48'000 - 1;
     // TIM4->PSC = DEBOUNCE_TIME_MS;
-    TIM4->PSC = 1'000;
+    TIM4->PSC = 1'000;  // TODO remove
+    // TIM4->CR1 |= TIM_CR1_OPM;  // TODO remove
 
     // Start TIM4.
     // TIM4->CR1 |= TIM_CR1_CEN;
