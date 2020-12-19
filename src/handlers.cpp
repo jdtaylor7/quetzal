@@ -52,17 +52,13 @@ void tim3_handler()
 void tim4_handler()
 {
     TIM4->SR = 0;
-    GPIOA->ODR ^= GPIO_ODR_ODR11;
 
     /*
      * If true, debounce test passed and input is valid.
      */
-    // if (~(GPIOB->IDR & GPIO_IDR_IDR12))
+    if (!(GPIOB->IDR & GPIO_IDR_IDR12))
         // GPIOA->ODR ^= GPIO_ODR_ODR11;
-
-    // Stop and reset timer.
-    // TIM4->CR1 &= ~TIM_CR1_CEN;
-    // debounce_active = false;
+        GPIOC->ODR ^= GPIO_ODR_ODR13;
 }
 
 /*
@@ -77,22 +73,6 @@ void exti15_10_handler()
         EXTI->PR |= EXTI_PR_PR12;
 
         // Start TIM4.
-        // TIM4->CR1 |= TIM_CR1_CEN;
-        // Toggle TIM4.
-        TIM4->CR1 &= TIM_CR1_CEN;  // TODO remove
-
-        // if (!debounce_active)
-        // {
-        //     debounce_active = true;
-        //     GPIOA->ODR ^= GPIO_ODR_ODR11;
-        //
-        //     // Start TIM4.
-        //     // TIM4->CNT = 0;
-        //     // TIM4->CR1 |= TIM_CR1_CEN;
-        //
-        //     // Start TIM3.
-        //     // TIM3->SR = 0;
-        //     // TIM3->CR1 &= ~TIM_CR1_CEN;
-        // }
+        TIM4->CR1 |= TIM_CR1_CEN;
     }
 }
