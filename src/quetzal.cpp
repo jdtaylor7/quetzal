@@ -43,6 +43,8 @@ void main()
     init_tim4();
     // init_serial(USART_BAUD);
 
+    GPIOC->BSRR = GPIO_BSRR_BR13;
+
     while (1)
         __WFI();
 }

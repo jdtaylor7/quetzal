@@ -37,13 +37,13 @@ void default_handler()
 void tim2_handler()
 {
     TIM2->SR = 0;
-    // GPIOA->ODR ^= GPIO_ODR_ODR11;
+    GPIOA->ODR ^= GPIO_ODR_ODR11;
 }
 
 void tim3_handler()
 {
     TIM3->SR = 0;
-    GPIOC->ODR ^= GPIO_ODR_ODR13;
+    // GPIOC->ODR ^= GPIO_ODR_ODR13;
 }
 
 /*
@@ -76,18 +76,18 @@ void exti15_10_handler()
         // Clear interrupt.
         EXTI->PR |= EXTI_PR_PR12;
 
-        GPIOA->ODR ^= GPIO_ODR_ODR11;
+        // GPIOA->ODR ^= GPIO_ODR_ODR11;
 
-        TIM3->SR = 0;
-        // Stop TIM3.
-        // TIM3->CR1 &= ~TIM_CR1_CEN;
-        // Start TIM3.
-        TIM3->CR1 |= TIM_CR1_CEN;
-        // Toggle TIM3.
-        // if (TIM3->CR1 & TIM_CR1_CEN)
-        //     TIM3->CR1 &= ~TIM_CR1_CEN;
+        TIM2->SR = 0;
+        // Stop TIM2.
+        // TIM2->CR1 &= ~TIM_CR1_CEN;
+        // Start TIM2.
+        TIM2->CR1 |= TIM_CR1_CEN;
+        // Toggle TIM2.
+        // if (TIM2->CR1 & TIM_CR1_CEN)
+        //     TIM2->CR1 &= ~TIM_CR1_CEN;
         // else
-        //     TIM3->CR1 |= TIM_CR1_CEN;
+        //     TIM2->CR1 |= TIM_CR1_CEN;
 
         // if (!debounce_active)
         // {
