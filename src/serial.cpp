@@ -19,19 +19,19 @@ void init_serial(uint32_t baud)
     GPIOA->CRH &= ~(GPIO_CRH_MODE9_0 | GPIO_CRH_CNF9_0);
 }
 
-void usartWriteChar(unsigned char c)
+void usart_write_char(unsigned char c)
 {
     while (!(USART1->SR & USART_SR_TXE)) {}
     USART1->DR = c;
 }
 
-// void usartWriteStr(const std::string& str)
+// void usart_write_str(const std::string& str)
 // {
 //     for (unsigned char c : str)
 //         usartWriteChar(c);
 // }
 
-void usartWriteStr(const char* str)
+void usart_write_str(const char* str)
 {
     for (const char* c = str; *c; c++)
         usartWriteChar(*c);

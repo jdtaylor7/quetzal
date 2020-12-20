@@ -9,10 +9,10 @@
 
 void init_serial(uint32_t baud);
 
-void usartWriteChar(unsigned char c);
+void usart_write_char(unsigned char c);
 
-// void usartWriteStr(const std::string& str);
+// void usart_write_str(const std::string& str);
 
-void usartWriteStr(const char* str);
+void usart_write_str(const char* str);
 
 #endif /* SERIAL_HPP */
