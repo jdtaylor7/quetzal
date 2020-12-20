@@ -54,7 +54,7 @@ void init_tim3()
 /*
  * Operates at 1 kHz. Runs for a specified number of milliseconds. Source is
  * APB1 * 2, which is (24 MHz) * 2. Therefore, must divide by 48k. Auto-reload
- * (ARR) value of 24k fits in the 16-bit ARR register, so prescaling is not
+ * (ARR) value of 48k fits in the 16-bit ARR register, so prescaling is not
  * required.
  */
 void init_tim4()

@@ -7,17 +7,23 @@ constexpr uint32_t USART_BAUD = 9600;
  */
 void main()
 {
-    // Set up GPIO C13 (green light) for LED control, then turn off.
+    // Set up GPIO C13 (green light) as output for LED control, then turn off.
     RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
     GPIOC->CRH &= ~(GPIO_CRH_CNF13_0 | GPIO_CRH_CNF13_1);  // GPIO push-pull
     GPIOC->CRH |= (GPIO_CRH_MODE13_0 | GPIO_CRH_MODE13_1);  // output @ 50 MHz
     GPIOC->BSRR = GPIO_BSRR_BR13;
 
-    // Set up GPIO A11, then turn off.
+    // Set up GPIO A11 as output, then turn off.
     RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
     GPIOA->CRH &= ~(GPIO_CRH_CNF11_0 | GPIO_CRH_CNF11_1);  // GPIO push-pull
     GPIOA->CRH |= (GPIO_CRH_MODE11_0 | GPIO_CRH_MODE11_1);  // output @ 50 MHz
     GPIOA->BSRR |= GPIO_BSRR_BR11;
+
+    // Set up GPIO A1 as output, then turn off.
+    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+    GPIOA->CRL &= ~(GPIO_CRL_CNF1_0 | GPIO_CRL_CNF1_1);  // GPIO push-pull
+    GPIOA->CRL |= (GPIO_CRL_MODE1_0 | GPIO_CRL_MODE1_1);  // output @ 50 MHz
+    GPIOA->BSRR |= GPIO_BSRR_BR1;
 
     // Set GPIO B12 as external interrupt input with internal pull-up.
     RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
@@ -38,8 +44,8 @@ void main()
     NVIC_SetPriority(EXTI15_10_IRQn, 3);
 
     init_sysclk();
-    // init_tim2();
-    // init_tim3();
+    init_tim2();
+    init_tim3();
     init_tim4();
     // init_serial(USART_BAUD);
 

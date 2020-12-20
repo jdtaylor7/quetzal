@@ -1,7 +1,5 @@
 #include "handlers.hpp"
 
-bool debounce_active = false;
-
 void reset_handler()
 {
     // Set up GPIOC 13 (green light) for LED control, then turn off.
@@ -57,8 +55,7 @@ void tim4_handler()
      * If true, debounce test passed and input is valid.
      */
     if (!(GPIOB->IDR & GPIO_IDR_IDR12))
-        // GPIOA->ODR ^= GPIO_ODR_ODR11;
-        GPIOC->ODR ^= GPIO_ODR_ODR13;
+        GPIOA->ODR ^= GPIO_ODR_ODR1;
 }
 
 /*
