@@ -48,6 +48,7 @@ void main()
     init_tim3();
     init_tim4();
     // init_serial(USART_BAUD);
+    init_i2c();
 
     GPIOC->BSRR = GPIO_BSRR_BR13;
 

@@ -4,6 +4,7 @@
 #include <stm32f1xx.h>
 
 #include "clocks.hpp"
+#include "i2c.hpp"
 #include "serial.hpp"
 #include "test_language_features.hpp"
 #include "timers.hpp"

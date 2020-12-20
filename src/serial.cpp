@@ -7,7 +7,7 @@ void init_serial(uint32_t baud)
     uint16_t usart_divider = static_cast<uint16_t>(HSI / (16 * baud));
 
     // Set up USART1 peripheral.
-    RCC->APB2ENR |= RCC_APB2ENR_USART1EN;  // Enable USART1 peripheral
+    RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
     USART1->CR1 = USART_CR1_UE | USART_CR1_TE;
     USART1->CR2 = 0;
     USART1->CR3 = 0;
