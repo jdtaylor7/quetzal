@@ -34,5 +34,5 @@ void usart_write_char(unsigned char c)
 void usart_write_str(const char* str)
 {
     for (const char* c = str; *c; c++)
-        usartWriteChar(*c);
+        usart_write_char(*c);
 }
