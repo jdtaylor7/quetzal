@@ -21,7 +21,7 @@ void init_serial(uint32_t baud)
 
 void usart_write_char(unsigned char c)
 {
-    while (!(USART1->SR & USART_SR_TXE)) {}
+    while (!(USART1->SR & USART_SR_TXE));
     USART1->DR = c;
 }
 
