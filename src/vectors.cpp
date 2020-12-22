@@ -58,8 +58,8 @@ extern "C" void default_handler_wrapper()
 #define irq45_handler    tim8_trg_com_handler
 #define irq46_handler    tim8_cc_handler
 #define irq47_handler    adc3_handler
-#define irq48_handler    fsmC_handler
-#define irq49_handler    sdiO_handler
+#define irq48_handler    fsmc_handler
+#define irq49_handler    sdio_handler
 #define irq50_handler    tim5_handler
 #define irq51_handler    spi3_handler
 #define irq52_handler    usart4_handler
