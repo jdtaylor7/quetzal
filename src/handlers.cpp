@@ -1,12 +1,17 @@
 #include "handlers.hpp"
 
+
+extern bool start_symbol_sent;
+extern bool address_sent;
+extern bool data_register_empty;
+
 void reset_handler()
 {
     // Set up GPIOC 13 (green light) for LED control, then turn off.
     RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
     GPIOC->CRH &= ~(GPIO_CRH_CNF13_0 | GPIO_CRH_CNF13_1);
     GPIOC->CRH |= (GPIO_CRH_MODE13_0 | GPIO_CRH_MODE13_1);
-    GPIOC->BSRR = GPIO_BSRR_BR13;
+    GPIOC->BSRR = GPIO_BSRR_BS13;
 
     // Run all startup code.
     startup();
@@ -14,7 +19,7 @@ void reset_handler()
     // Set GPIO and hang if tests fail.
     if (!test_all_language_features())
     {
-        GPIOC->BSRR = GPIO_BSRR_BS13;
+        GPIOC->BSRR = GPIO_BSRR_BR13;
         while (1);
     }
 
@@ -41,7 +46,7 @@ void tim2_handler()
 void tim3_handler()
 {
     TIM3->SR = 0;
-    GPIOC->ODR ^= GPIO_ODR_ODR13;
+    // GPIOC->ODR ^= GPIO_ODR_ODR13;
 }
 
 /*
@@ -72,4 +77,19 @@ void exti15_10_handler()
         // Start TIM4.
         TIM4->CR1 |= TIM_CR1_CEN;
     }
+}
+
+void i2c1_ev_handler()
+{
+    // if (I2C1->SR1 & I2C_SR1_SB)
+    //     start_symbol_sent = true;
+    // else if (I2C1->SR1 & I2C_SR1_ADDR)
+    //     address_sent = true;
+    // else if (I2C1->SR1 & I2C_SR1_TXE)
+    //     data_register_empty = true;
+}
+
+void i2c1_er_handler()
+{
+
 }

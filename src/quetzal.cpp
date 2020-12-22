@@ -7,11 +7,12 @@ constexpr uint32_t USART_BAUD = 9600;
  */
 void main()
 {
-    // Set up GPIO C13 (green light) as output for LED control, then turn off.
+    // Set up GPIO C13 (green light) as output for LED control, then turn off
+    // (by setting it, it has a pull-up).
     RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
     GPIOC->CRH &= ~(GPIO_CRH_CNF13_0 | GPIO_CRH_CNF13_1);  // GPIO push-pull
     GPIOC->CRH |= (GPIO_CRH_MODE13_0 | GPIO_CRH_MODE13_1);  // output @ 50 MHz
-    GPIOC->BSRR = GPIO_BSRR_BR13;
+    GPIOC->BSRR = GPIO_BSRR_BS13;
 
     // Set up GPIO A11 as output, then turn off.
     RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
@@ -50,8 +51,13 @@ void main()
     // init_serial(USART_BAUD);
     init_i2c();
 
-    GPIOC->BSRR = GPIO_BSRR_BR13;
+    // while (1)
+        // __WFI();
 
     while (1)
-        __WFI();
+    {
+        i2c_write_data("hello!", 0x3);
+        // GPIOC->ODR ^= GPIO_ODR_ODR13;
+        // GPIOC->BSRR ^= GPIO_BSRR_BR13;
+    }
 }
